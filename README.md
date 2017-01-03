@@ -2,8 +2,7 @@
 
 # gulp-precompile-handlebars
 
-A gulp plugin to precompile handlebars templates, and output separate compiled templates that use the exports syntax. 
-
+A gulp plugin to precompile handlebars templates, and output separate compiled templates that use the exports syntax. I prefer the ES module loader syntax over named templates, and it works great when using it in conjunction with a module bundler. The precompilation also helps avoiding issues with CSP policy flags `unsafe eval` and `inline eval`.
 
 # Usage
 
