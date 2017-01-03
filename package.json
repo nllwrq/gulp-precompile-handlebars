@@ -4,7 +4,7 @@
   "description": "Gulp plugin to precompile handlebars templates to standalone files that use a module.exports syntax",
   "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/.bin/mocha"
+    "test": "node ./node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
