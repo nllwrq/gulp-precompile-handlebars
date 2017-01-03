@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/justusromijn/gulp-precompile-handlebars.svg?branch=master)](https://travis-ci.org/justusromijn/gulp-precompile-handlebars)
+
 # gulp-precompile-handlebars
 
 A gulp plugin to precompile handlebars templates, and output separate compiled templates that use the exports syntax. 
