@@ -1,12 +1,13 @@
 var through = require('through2');
 var handlebars = require('handlebars');
 
-module.exports = function precompile() {
+module.exports = function precompile(obj) {
 
     function precompileHandlebars(file, enc, done) {
-        var content = new Buffer(handlebars.precompile(file.contents.toString('utf8')));
-        file.contents = content;
 
+        var settings = obj || file.frontMatter;
+
+        file.contents = new Buffer(handlebars.precompile(file.contents.toString('utf8')), settings);
         file.defineModuleOptions = {
             require: {
                 Handlebars: 'handlebars'
