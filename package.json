@@ -1,6 +1,6 @@
 {
   "name": "gulp-precompile-handlebars",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Gulp plugin to precompile handlebars templates to standalone files that use a module.exports syntax",
   "main": "index.js",
   "scripts": {
