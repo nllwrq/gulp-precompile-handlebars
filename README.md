@@ -2,7 +2,7 @@
 
 # gulp-precompile-handlebars
 
-A gulp plugin to precompile handlebars templates, and output separate compiled templates that use the exports syntax. I prefer the ES module loader syntax over named templates, and it works great when using it in conjunction with a module bundler. The precompilation also helps avoiding issues with CSP policy flags `unsafe eval` and `inline eval`.
+A gulp plugin to precompile handlebars templates, and output separate compiled templates that use the exports syntax. It is easy to use the plugin `gulp-define-module` to wrap the compiled templates in a module bundling syntax. Precompiling is required when you want to enable [Content Security Policy][csp] on your server, as handlebars, compiling in the client, uses `eval` or `new Function(String)` which is not allowed. If you precompile, you can just use the runtime version of Handlebars which doesn't have the compilation code.
 
 # Usage
 
@@ -26,6 +26,14 @@ return gulp.src('src/templates/*.hbs')
   .pipe(gulp.dest('src/templates'));
 ```
 
+Precompile Handlebars consumes an optional configuration parameter and passes it on, but you can also use the `gulp-front-matter` plugin to attach compile settings to your files [front matter][frontmatter] for some, specific control:
+```
+---
+noEscape: true
+---
+<div>{{foo}}</div>
+```
+
 ### Project
 
 You can now use handlebars-runtime in your project instead of the full version.
@@ -37,10 +45,10 @@ import handleBars from 'handlebars/handlebars.runtime.js';
 // grab the compiled template
 import compiledTemplate from 'path/to/compiled/template.js';
 
-// call template method with the the compiled template 
-var template = handleBars.template(compiledTemplate);
-
 // execute the template with optional data
-var parsed = template({ foo: 'bar' });
-
+var parsed = compiledTemplate({ foo: 'bar' });
 ```
+
+
+[csp]: https://w3c.github.io/webappsec-csp/  "W3C Content Security Policy"
+[frontmatter]: https://jekyllrb.com/docs/frontmatter/ "Front Matter explanation"
