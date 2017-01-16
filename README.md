@@ -11,22 +11,23 @@ A gulp plugin to precompile handlebars templates, and output separate compiled t
 npm install gulp-precompile-handlebars
 ```
 
-### Gulpfile
+### Gulp configuration
 
-The plugin takes a stream of multiple files and returns the compiled result. It is up to you to rename those files and move them to a specific folder. This example uses the `gulp-rename` plugin for changing the extension.
+The plugin takes a stream of multiple files and returns the compiled result. It is up to you to rename those files and move them to a specific folder. This example uses the `gulp-rename` plugin for changing the extension and `gulp-define-module` to wrap it with the desired module definition.
 ``` javascript
 var gulp = require('gulp');
 var rename = require('gulp-rename');
+var defineModule = require('gulp-define-module');
 var precompileHandlebars = require('gulp-precompile-handlebars');
-
 
 return gulp.src('src/templates/*.hbs')
   .pipe(precompileHandlebars())
   .pipe(rename({ extname: '.js' })
+  .pipe(defineModule('es6'))
   .pipe(gulp.dest('src/templates'));
 ```
 
-Precompile Handlebars consumes an optional configuration parameter and passes it on, but you can also use the `gulp-front-matter` plugin to attach compile settings to your files [front matter][frontmatter] for some, specific control:
+Precompile Handlebars consumes an optional configuration parameter and passes it on to the handlebars [precompile function][precompile-api] `precompileHandlebars({noEscape: true})`, but you can also use the `gulp-front-matter` plugin to attach compile settings to your files [front matter][frontmatter] for some, specific control:
 ```
 ---
 noEscape: true
@@ -52,3 +53,4 @@ var parsed = compiledTemplate({ foo: 'bar' });
 
 [csp]: https://w3c.github.io/webappsec-csp/  "W3C Content Security Policy"
 [frontmatter]: https://jekyllrb.com/docs/frontmatter/ "Front Matter explanation"
+[precompile-api]: http://handlebarsjs.com/reference.html
